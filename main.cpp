@@ -19,7 +19,6 @@
 #include <time.h>
 #include <math.h>
 
-//#define PLATFORM_WEB
 
 #if defined(PLATFORM_WEB)
     #include <emscripten/emscripten.h>
@@ -191,6 +190,9 @@ void InitGame(void)
             incomingPiece[i][j] = EMPTY;
         }
     }
+
+    std::cout << "Press 'S' at the end to share your score with the server!" << std::endl;
+
 }
 
 // Update game (one frame)
@@ -300,12 +302,10 @@ void UpdateGame(void)
             gameOver = false;
         }
         else if (IsKeyPressed(KEY_S)) {
-            std::cout << "Sendind score to database ..." << std::endl;
+            std::cout << "Sending score to database ..." << std::endl;
             
-            //#define PLATFORM_WEB
             #if defined(PLATFORM_WEB)
-
-                std::cout << "PLATFORM WEB :" << std::endl;
+                //std::cout << "PLATFORM WEB :" << std::endl;
 
                 EM_ASM({ 
                 console.log('I received: ' + $0);
