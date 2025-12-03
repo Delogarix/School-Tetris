@@ -194,9 +194,6 @@ void InitGame(void)
             incomingPiece[i][j] = EMPTY;
         }
     }
-
-    std::cout << "Press 'S' at the end to share your score with the server!" << std::endl;
-
 }
 
 // Update game (one frame)
@@ -309,11 +306,11 @@ void UpdateGame(void)
             gameOver = false;
         }
         else if (!transfer) {
-            std::cout << "Sending score to database ..." << std::endl;
+            std::cout << "Sending score to the server ..." << std::endl;
             
             #if defined(PLATFORM_WEB)
                 //std::cout << "PLATFORM WEB :" << std::endl;
-                float finalScore = (lines * 3) / ( 0.01 * gameTime);
+                float finalScore = (lines * 3) / ( 0.005 * gameTime);
                 EM_ASM({ 
                 console.log('I received: ' + $0);
                 fetch("score.php",
@@ -425,7 +422,7 @@ void DrawGame(void)
         }
         else {
             DrawText("PRESS [ENTER] TO PLAY AGAIN", GetScreenWidth()/2 - MeasureText("PRESS [ENTER] TO PLAY AGAIN", 20)/2 - 50, GetScreenHeight()/2 - 50, 20, GRAY);
-            DrawText(TextFormat("Score : %f", (lines * 3) / ( 0.01 * gameTime)), GetScreenWidth()/2 - 100, 250, 20, DARKGREEN);
+            DrawText(TextFormat("Score : %f", (lines * 3) / ( 0.005 * gameTime)), GetScreenWidth()/2 - 100, 250, 20, DARKGREEN);
             DrawText(TextFormat("Lines : %d", lines), GetScreenWidth()/2 - 100, 275, 20, BLUE);
             DrawText(TextFormat("Time : %f", gameTime), GetScreenWidth()/2 - 100, 300, 20, GOLD);
         }

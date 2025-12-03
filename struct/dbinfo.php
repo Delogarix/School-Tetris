@@ -1,5 +1,5 @@
 <?php
 
-$db_passwd = 'KzuaDJ';
+$db_passwd = 'MqLwsq';
 
 ?>
