@@ -27,7 +27,7 @@ try {
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,30 +38,28 @@ try {
     <header class="d-flex justify-content-center py-3">
         <?php include_once(__DIR__ . "/struct/header.php") ?>
     </header>
-    <main>
-        <div id="board">
-            <div class="container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="table-info"><p>Id :</p></th>
-                            <th scope="col" class="table-info"><p> Score :</p></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            if (isset($dbContent)) {
-                                foreach ($dbContent as $dbrow) {
-                                    echo "<tr>";
-                                    echo "<td> {$dbrow['id']} </td>";
-                                    echo "<td> {$dbrow['score']} </td>";
-                                    echo "</tr>";
-                                }
+    <main class="d-flex justify-content-center py-3">
+        <div class="container">
+            <table class="table border">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-info"><p>Id :</p></th>
+                        <th scope="col" class="table-info"><p> Score :</p></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        if (isset($dbContent)) {
+                            foreach ($dbContent as $dbrow) {
+                                echo "<tr>";
+                                echo "<td> {$dbrow['id']} </td>";
+                                echo "<td> {$dbrow['score']} </td>";
+                                echo "</tr>";
                             }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
+                        }
+                    ?>
+                </tbody>
+            </table>
         </div>
     </main>
 </body>
