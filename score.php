@@ -16,7 +16,6 @@ try {
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
-$bdd = "oldval";
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode($decoded);
 ?>
