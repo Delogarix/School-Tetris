@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 02 déc. 2025 à 21:44
+-- Généré le : mer. 03 déc. 2025 à 18:18
 -- Version du serveur : 10.11.6-MariaDB-0+deb12u1
 -- Version de PHP : 8.2.18
 
@@ -29,8 +29,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `LEADERBOARD` (
   `id` int(11) NOT NULL,
-  `score` int(11) NOT NULL
+  `score` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `LEADERBOARD`
+--
+
+INSERT INTO `LEADERBOARD` (`id`, `score`) VALUES
+(1, 12.985045433044),
+(2, 18.740631103516);
 
 --
 -- Index pour les tables déchargées
@@ -50,7 +58,7 @@ ALTER TABLE `LEADERBOARD`
 -- AUTO_INCREMENT pour la table `LEADERBOARD`
 --
 ALTER TABLE `LEADERBOARD`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

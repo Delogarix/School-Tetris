@@ -51,6 +51,7 @@ static const int screenHeight = 450;
 
 static bool gameOver = false;
 static bool pause = false;
+static bool timer = false;
 
 // Matrices
 static GridSquare grid [GRID_HORIZONTAL_SIZE][GRID_VERTICAL_SIZE];
@@ -79,6 +80,7 @@ static int gravityMovementCounter = 0;
 static int lateralMovementCounter = 0;
 static int turnMovementCounter = 0;
 static int fastFallMovementCounter = 0;
+static float gameTime = 0.0f;
 
 static int fadeLineCounter = 0;
 
@@ -201,6 +203,9 @@ void UpdateGame(void)
     if (!gameOver)
     {
         if (IsKeyPressed('P') && pause) pause = !pause;
+        if (IsKeyPressed('T')) timer = !timer;
+
+        gameTime = GetTime();
 
         if (!pause)
         {
@@ -306,7 +311,7 @@ void UpdateGame(void)
             
             #if defined(PLATFORM_WEB)
                 //std::cout << "PLATFORM WEB :" << std::endl;
-
+                float finalScore = (lines * 3) / ( 0.01 * gameTime);
                 EM_ASM({ 
                 console.log('I received: ' + $0);
                 fetch("score.php",
@@ -314,7 +319,7 @@ void UpdateGame(void)
                     method: "POST",
                     body: JSON.stringify({score: $0})
                 }).then(function(res){ console.log(res); }).catch(function(res){ console.log(res + "Catch") })
-                }, lines);
+                }, finalScore);
             #endif
 
             InitGame();
@@ -414,10 +419,13 @@ void DrawGame(void)
             DrawText(TextFormat("LINES:      %04i", lines), offset.x, offset.y + 20, 10, GRAY);
 
             if (pause) DrawText("GAME PAUSED ('P' to unpause)", screenWidth/2 - MeasureText("GAME PAUSED ('P' to unpause)", 40)/2, screenHeight/2 - 80, 40, GRAY);
+            if (timer) DrawText(TextFormat("Time : %f", gameTime), GetScreenWidth()/2 + 150, 300, 20, GRAY);
         }
         else {
             DrawText("PRESS [ENTER] TO PLAY AGAIN", GetScreenWidth()/2 - MeasureText("PRESS [ENTER] TO PLAY AGAIN", 20)/2 - 50, GetScreenHeight()/2 - 50, 20, GRAY);
-            DrawText(TextFormat("Last score: %d", lines), GetScreenWidth()/2 - 100, 250, 20, DARKGREEN);
+            DrawText(TextFormat("Score : %f", (lines * 3) / ( 0.01 * gameTime)), GetScreenWidth()/2 - 100, 250, 20, DARKGREEN);
+            DrawText(TextFormat("Lines : %d", lines), GetScreenWidth()/2 - 100, 275, 20, BLUE);
+            DrawText(TextFormat("Time : %f", gameTime), GetScreenWidth()/2 - 100, 300, 20, GOLD);
         }
 
     EndDrawing();
