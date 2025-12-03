@@ -52,6 +52,7 @@ static const int screenHeight = 450;
 static bool gameOver = false;
 static bool pause = false;
 static bool timer = false;
+static bool transfer = false;
 
 // Matrices
 static GridSquare grid [GRID_HORIZONTAL_SIZE][GRID_VERTICAL_SIZE];
@@ -152,6 +153,7 @@ void InitGame(void)
     // Initialize game statistics
     level = 1;
     lines = 0;
+    transfer = false;
 
     fadingColor = GRAY;
 
@@ -306,7 +308,7 @@ void UpdateGame(void)
             InitGame();
             gameOver = false;
         }
-        else if (IsKeyPressed(KEY_S)) {
+        else if (!transfer) {
             std::cout << "Sending score to database ..." << std::endl;
             
             #if defined(PLATFORM_WEB)
