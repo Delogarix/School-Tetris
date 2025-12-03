@@ -1,11 +1,13 @@
 <?php
 
+include_once(__DIR__ . "/struct/dbinfo.php");
+
 try {
 
     $db_server = new PDO(
         'mysql:host=localhost;dbname=tetris;charset=utf8',
         'root',
-        '3wrDPG'
+        $db_passwd
     );
 
     $content = trim(file_get_contents("php://input"));
