@@ -4,7 +4,7 @@ try {
     $db_server = new PDO(
         'mysql:host=localhost;dbname=tetris;charset=utf8',
         'root',
-        '49zbHu'
+        '3wrDPG'
     );
 
     $content = trim(file_get_contents("php://input"));
